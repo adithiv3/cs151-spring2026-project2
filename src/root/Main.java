@@ -1,5 +1,6 @@
 public class Main {
     public static void main(String[] args){
-        System.out.println("Hello World");
+        Hotel myHotel = new Hotel("Hilton", "375 S 9th St, San Jose, CA, 95112");
+        System.out.println(myHotel.toString());
     }
 }

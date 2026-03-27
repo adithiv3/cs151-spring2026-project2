@@ -18,4 +18,6 @@ public abstract class Room {
     public void vacateRoom() {
         this.isAvailable = true;
     }
+
+    public abstract int calculateCost();
 }

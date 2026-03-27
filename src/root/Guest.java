@@ -1,3 +1,4 @@
+package src.root;
 public class Guest extends User{
 	
 	private Reservation reservation;

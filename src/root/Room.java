@@ -19,5 +19,16 @@ public abstract class Room {
         this.isAvailable = true;
     }
 
+    public boolean isAvailable() {
+        return isAvailable;
+    }
+
+    public void setAvailability(boolean status) {
+        this.isAvailable = status;
+    }
+
     public abstract int calculateCost();
+
+    public abstract String getRoomType();
+
 }

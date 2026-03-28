@@ -5,6 +5,7 @@ import java.time.LocalDate;
 public class Guest implements Chargeable {
 
     private static int nextGuestId = 1;
+    private static int totalGuests = 0;
 
     private String guestId;
     private String name;
@@ -14,6 +15,10 @@ public class Guest implements Chargeable {
 
     // This is my constructor
 	public Guest(String name, String membershipLevel) {
+		if (totalGuests >= Main.MAXIMUM_INSTANCES) {
+			throw new IllegalStateException("Maximum number of guests reached.");
+		}
+		totalGuests++;
         this.name = name;
         this.membershipLevel = membershipLevel;
         this.outstandingBalance = 0.0;
@@ -31,13 +36,21 @@ public class Guest implements Chargeable {
     		throw new InvalidDateRangeException("Invalid date range.");
     	}
 
+		// Let's make sure we have a positive guest count
+		if (guestCount <= 0) {
+			throw new IllegalArgumentException("Guest count must be positive.");
+		}
+
     	// Now, let's find our room
     	Room room = hotel.findAvailableRoom(roomType, guestCount);
 
     	if (room == null) {
-    		System.out.println("No available room found.");
-    		return null;
+			throw new RoomUnavailableException("No available room found.");
     	}
+
+		if (!room.canFitGuests(guestCount)) {
+			throw new OverCapacityException("Too many guests for this room.");
+		}
     	
     	// Now let's create our reservation
         Reservation reservation = new Reservation(this, room, checkIn, checkOut);
@@ -47,7 +60,8 @@ public class Guest implements Chargeable {
         hotel.addReservation(reservation);
 
         System.out.println("Reservation successful! ID: " + reservation.getReservationId());
-
+		room.markOccupied();
+		
         return reservation;
 
     }
@@ -61,10 +75,15 @@ public class Guest implements Chargeable {
     		return;
     	}
 
-    	currentReservation.cancelReservation();
-    	currentReservation = null;
+		Room room = currentReservation.getRoom();
+		currentReservation.cancelReservation();
+		
+		if (room != null) {
+			room.markAvailable();
+		}
+		currentReservation = null;    	
     	
-    	// Display message to confirm room was cancelled
+		// Display message to confirm room was cancelled
     	System.out.println("Reservation cancelled.");
     }
     
@@ -81,8 +100,13 @@ public class Guest implements Chargeable {
     	}
     	
     	// now let's affect our balance
-    	outstandingBalance += amount;
-    	System.out.println("Charge amount: $" + amount + "[" + reason + "]");
+		if (currentReservation != null) {
+			currentReservation.addCharge(amount, reason);
+		} else {
+			outstandingBalance += amount;
+		} 
+		
+		System.out.println("Charge amount: $" + amount + "[" + reason + "]");
     }
     
     // Next up our process payment method

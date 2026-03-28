@@ -1,5 +1,3 @@
-package src.root;
-
 public abstract class Room {
     protected int roomId;
     protected int capacity;
@@ -30,5 +28,10 @@ public abstract class Room {
     public abstract int calculateCost();
 
     public abstract String getRoomType();
+
+    public String getRoomId() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getRoomId'");
+    }
 
 }

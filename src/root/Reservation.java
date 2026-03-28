@@ -63,7 +63,7 @@ public class Reservation {
     }
 
     private String generateReservationID(){
-        return "RES-" + (nextReservationId++);
+        return "RESERVATION-" + (nextReservationId++);
     }
 
     public LocalDate getDueDate(){

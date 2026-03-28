@@ -1,5 +1,3 @@
-package src.root;
-
 public class Client{
 
     private String name;

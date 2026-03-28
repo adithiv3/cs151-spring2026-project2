@@ -12,7 +12,10 @@ public class Employee {
     private static final int MAX_EMPLOYEES = 100; // since we need to handle  a max of 100 instances
     private static int totalEmployees = 0;
 
-    public Employee(String name, String role, Hotel assignedHotel){
+    public Employee(String name, String role, Hotel assignedHotel) throws OverCapacityException{
+        if (totalEmployees >= MAX_EMPLOYEES){
+            throw new OverCapacityException("Error: Employee limit of 100 reached.");
+        }
         this.name = name;
         this.role = role;
         this.assignedHotel = assignedHotel;

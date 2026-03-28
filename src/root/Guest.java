@@ -1,6 +1,6 @@
 package src.root;
 
-public class Guest extends User {
+public class Guest extends Client {
 
 	private Reservation reservation;
 	private Room room;

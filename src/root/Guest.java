@@ -15,9 +15,10 @@ public class Guest implements Chargeable {
 
     // This is my constructor
 	public Guest(String name, String membershipLevel) {
-		if (totalGuests >= Main.MAXIMUM_INSTANCES) {
-			throw new IllegalStateException("Maximum number of guests reached.");
-		}
+        if (totalGuests >= Main.MAXIMUM_INSTANCES) {
+            System.out.println("Error: Maximum number of guests reached.");
+            return;
+        }
 		totalGuests++;
         this.name = name;
         this.membershipLevel = membershipLevel;

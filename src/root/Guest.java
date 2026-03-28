@@ -19,7 +19,7 @@ public class Guest implements Chargeable {
             System.out.println("Error: Maximum number of guests reached.");
             return;
         }
-		totalGuests++;
+        totalGuests++;
         this.name = name;
         this.membershipLevel = membershipLevel;
         this.outstandingBalance = 0.0;

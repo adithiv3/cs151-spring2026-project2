@@ -63,6 +63,16 @@ public class Hotel {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void removeRoom(Room room) {
+        if (!rooms.remove(room)) {
+            System.out.println("Room " + room.getRoomId() + " not found in " + name + ".");
+        }
+    }
+
     public List<Room> getRooms() {
         return rooms;
     }

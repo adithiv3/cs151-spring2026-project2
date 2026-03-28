@@ -65,6 +65,18 @@ public class Employee {
     public String getEmployeeID(){
         return this.employeeID;
     }
+
+    public String getName(){
+        return this.name;
+    }
+
+    public String getRole(){
+        return this.role;
+    }
+
+    public Hotel getAssignedHotel(){
+        return this.assignedHotel;
+    }
     private String generateEmployeeID(){
         return "EMPLOYEE-" + (nextEmployeeID++);
     }

@@ -1,48 +1,95 @@
 import java.util.ArrayList;
+import java.util.List;
 
 public class Hotel {
-    private static int totalHotels = 0;
+    private static int nextHotelId = 1;
 
-    String name, address;
-    ArrayList<Room> roomList;
-    ArrayList<Guest> guestList;
-    ArrayList<Employee> employeeList;
-    ArrayList<Reservation> reservations;
-    public Hotel(String name, String address){
-        if (totalHotels >= Main.MAXIMUM_INSTANCES) {
-            System.out.println("Error: Maximum number of hotels reached.");
+    private String hotelId;
+    private String name;
+    private List<Room> rooms;
+    private List<Guest> guests;
+    private List<Employee> employees;
+    private List<Reservation> reservations;
+
+    public Hotel(String name) {
+        this.name = name;
+        this.hotelId = generateHotelId();
+        this.rooms = new ArrayList<>();
+        this.guests = new ArrayList<>();
+        this.employees = new ArrayList<>();
+        this.reservations = new ArrayList<>();
+    }
+
+    public void addRoom(Room room) {
+        rooms.add(room);
+    }
+
+    public void registerGuest(Guest guest) {
+        if (guests.contains(guest)) {
+            System.out.println("Guest " + guest.getName() + " is already registered.");
             return;
         }
-        totalHotels++;
-        this.name = name;
-        this.address = address;
-        roomList = new ArrayList<Room>(Main.MAXIMUM_INSTANCES);
-        guestList = new ArrayList<Guest>(Main.MAXIMUM_INSTANCES);
-        employeeList = new ArrayList<Employee>(Main.MAXIMUM_INSTANCES);
-        reservations = new ArrayList<Reservation>(Main.MAXIMUM_INSTANCES);
+        guests.add(guest);
     }
-    @Override
-    public String toString(){
-        return "Hotel name: " + name
-                + "\nAddress: " + address
-                + "\nNumber of available rooms: " + (Main.MAXIMUM_INSTANCES - roomList.size());
+
+    public void hireEmployee(Employee employee) {
+        if (employees.contains(employee)) {
+            System.out.println("Employee " + employee.getEmployeeID() + " is already hired.");
+            return;
+        }
+        employees.add(employee);
     }
-    public void addGuest(Guest g){
-        guestList.add(g);
+
+    public Room findAvailableRoom(String roomType, int guestCount) {
+        for (Room room : rooms) {
+            if (room.isAvailable()
+                    && room.getRoomType().equalsIgnoreCase(roomType)
+                    && room.canFitGuests(guestCount)) {
+                return room;
+            }
+        }
+        return null;
     }
-    public void removeGuest(Guest g){
-        guestList.remove(g);
-    }
-    public void addRoom(Room r){
-        roomList.add(r);
-    }
-    public void removeRoom(Room room){
-        roomList.remove(room);
-    }
-    public void addReservation(Reservation reservation){
+
+    public void addReservation(Reservation reservation) {
         reservations.add(reservation);
     }
-    public void removeReservation(Reservation reservation){
-        reservations.remove(reservation);
+
+    public String getHotelId() {
+        return hotelId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public List<Room> getRooms() {
+        return rooms;
+    }
+
+    public List<Guest> getGuests() {
+        return guests;
+    }
+
+    public List<Employee> getEmployees() {
+        return employees;
+    }
+
+    public List<Reservation> getReservations() {
+        return reservations;
+    }
+
+    private String generateHotelId() {
+        return "HOTEL-" + (nextHotelId++);
+    }
+
+    @Override
+    public String toString() {
+        return "Hotel ID: " + hotelId
+                + "\nName: " + name
+                + "\nAvailable Rooms: " + (Main.MAXIMUM_INSTANCES - rooms.size())
+                + "\nGuests: " + guests.size()
+                + "\nEmployees: " + employees.size()
+                + "\nReservations: " + reservations.size();
     }
 }

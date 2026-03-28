@@ -9,12 +9,12 @@ public class Employee {
 
     // to handle ID number generation
     private static int nextEmployeeID = 1;
-    private static final int MAX_EMPLOYEES = 100; // since we need to handle  a max of 100 instances
     private static int totalEmployees = 0;
 
-    public Employee(String name, String role, Hotel assignedHotel) throws OverCapacityException{
-        if (totalEmployees >= MAX_EMPLOYEES){
-            throw new OverCapacityException("Error: Employee limit of 100 reached.");
+    public Employee(String name, String role, Hotel assignedHotel) {
+        if (totalEmployees >= Main.MAXIMUM_INSTANCES) {
+            System.out.println("Error: Maximum number of employees reached.");
+            return;
         }
         this.name = name;
         this.role = role;
@@ -71,7 +71,7 @@ public class Employee {
 
     @Override
     public String toString(){
-        return "Employee Name: " + name + " \n ID: " + employeeID + "\n Role: " + role; 
+        return "Employee Name: " + name + " \n ID: " + employeeID + " \n Assigned Hotel: " + assignedHotel.getName() + "\n Role: " + role; 
     }
 
 }

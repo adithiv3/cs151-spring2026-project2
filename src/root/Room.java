@@ -1,5 +1,6 @@
 public abstract class Room {
     private static int idCounter = 100;
+    private static int totalRooms = 0;
 
     protected int roomId;
     protected double basePrice;
@@ -7,6 +8,11 @@ public abstract class Room {
     protected boolean isAvailable;
 
     public Room(double basePrice, int capacity) {
+        if (totalRooms >= Main.MAXIMUM_INSTANCES) {
+            System.out.println("Error: Maximum number of rooms reached.");
+            return;
+        }
+        totalRooms++;
         this.roomId = generateRoomId();
         setBasePrice(basePrice);
         setCapacity(capacity);

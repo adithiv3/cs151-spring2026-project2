@@ -9,8 +9,14 @@ public class Reservation {
     private boolean cancelled;
     private double outstandingBalance;
     private static int nextReservationId = 1; // Used for generateReservationID()
+    private static int totalReservations = 0;
 
     public Reservation( Guest guest, Room room, LocalDate checkInDate, LocalDate checkOutDate){
+        if (totalReservations >= Main.MAXIMUM_INSTANCES) {
+            System.out.println("Error: Maximum number of reservations reached.");
+            return;
+        }
+        totalReservations++;
         this.guest = guest;
         this.room = room;
         this.checkInDate = checkInDate;

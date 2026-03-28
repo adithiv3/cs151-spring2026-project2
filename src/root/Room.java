@@ -1,5 +1,3 @@
-package src.root;
-
 public abstract class Room {
     private static int idCounter = 100;
 

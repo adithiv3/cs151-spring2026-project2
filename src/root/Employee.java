@@ -34,22 +34,18 @@ public class Employee {
     }
 
     public void checkInGuest(Reservation reservation){
-        if (reservation != null && reservation.getOutstandingBalance() < 500)
-            {
+        if (reservation != null && reservation.getOutstandingBalance() == 0) {
             reservation.checkIn();
-            } 
-        else 
-            {
-                System.out.println("Check-in denied due to unverified reservation or unpaid balance");
-            }
+        } else {
+            System.out.println("Check-in denied due to unverified reservation or unpaid balance");
+        }
     }
 
     public void checkOutGuest(Reservation reservation){
-        if (reservation != null && reservation.getOutstandingBalance() == 0){
+        if (reservation != null) {
             reservation.checkOut();
-        }
-        else {
-            System.out.println("Check-out denied due to unpaid balance.");
+        } else {
+            System.out.println("Check-out denied: no reservation found.");
         }
     }
 

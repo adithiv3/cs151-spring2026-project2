@@ -1,5 +1,3 @@
-package src.root;
-
 public class SingleRoom extends Room {
 
     public SingleRoom(double basePrice) {

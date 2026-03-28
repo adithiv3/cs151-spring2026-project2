@@ -7,6 +7,8 @@ public class Reservation {
     private LocalDate checkInDate;
     private LocalDate checkOutDate;
     private boolean cancelled;
+    private boolean checkedIn;
+    private boolean checkedOut;
     private double outstandingBalance;
     private static int nextReservationId = 1; // Used for generateReservationID()
     private static int totalReservations = 0;
@@ -22,6 +24,8 @@ public class Reservation {
         this.checkInDate = checkInDate;
         this.checkOutDate = checkOutDate;
         this.cancelled = false;
+        this.checkedIn = false;
+        this.checkedOut = false;
         this.reservationID = generateReservationID();
         this.outstandingBalance = calculateTotalCharge();
     }
@@ -36,15 +40,21 @@ public class Reservation {
     }
 
     public void checkIn(){
-        if (!cancelled)
-            System.out.println("Guest checked in.");
+        this.checkedIn = true;
+        System.out.println("Guest checked in.");
     }
 
     public void checkOut(){
-        if (outstandingBalance == 0)
-            System.out.println("Guest checked out.");
-        else
-            System.out.println("Cannot checkout: Balance remaining.");
+        this.checkedOut = true;
+        System.out.println("Guest checked out.");
+    }
+
+    public boolean isCheckedIn() {
+        return checkedIn;
+    }
+
+    public boolean isCheckedOut() {
+        return checkedOut;
     }
 
     public double calculateTotalCharge(){
@@ -72,7 +82,33 @@ public class Reservation {
         return "RESERVATION-" + (nextReservationId++);
     }
 
-    public LocalDate getDueDate(){
+    public Guest getGuest() {
+        return guest;
+    }
+
+    public Room getRoom() {
+        return room;
+    }
+
+    public boolean isCancelled() {
+        return cancelled;
+    }
+
+    public LocalDate getCheckInDate() {
+        return checkInDate;
+    }
+
+    public LocalDate getCheckOutDate() {
         return checkOutDate;
+    }
+
+    @Override
+    public String toString() {
+        return "Reservation " + reservationID
+                + " | Guest: " + guest.getName()
+                + " | Room: " + room.getRoomId() + " (" + room.getRoomType() + ")"
+                + " | " + checkInDate + " to " + checkOutDate
+                + " | " + (cancelled ? "Cancelled" : checkedOut ? "Checked-Out" : checkedIn ? "Checked-In" : "Active")
+                + " | Balance: $" + outstandingBalance;
     }
 }

@@ -131,7 +131,7 @@ public class Guest implements Chargeable {
     
     // Now unlike the other getters, to generate the nextGuestId I will create a specific function
 	public String generateGuestId() {
-		return("GUEST-" + nextGuestId);
+		return("GUEST-" + (nextGuestId++));
 	}
 	
 	// Finally, here is our unique toString

@@ -1,20 +1,29 @@
 public abstract class Room {
-    private static int idCounter = 100;
+    private static final int ROOMS_PER_FLOOR = 25;
+    private static int totalRooms = 0;
 
-    protected int roomId;
+    protected String roomId;
     protected double basePrice;
     protected int capacity;
     protected boolean isAvailable;
 
     public Room(double basePrice, int capacity) {
+        if (totalRooms >= Main.MAXIMUM_INSTANCES) {
+            System.out.println("Error: Maximum number of rooms reached.");
+            return;
+        }
         this.roomId = generateRoomId();
+        totalRooms++;
         setBasePrice(basePrice);
         setCapacity(capacity);
         this.isAvailable = true;
     }
 
-    private int generateRoomId() {
-        return idCounter++;
+    private String generateRoomId() {
+        int floor = (totalRooms / ROOMS_PER_FLOOR) + 1;
+        int roomOnFloor = totalRooms % ROOMS_PER_FLOOR;
+        int number = floor * 100 + roomOnFloor;
+        return "ROOM-" + number;
     }
 
     // 🔥 Business logic
@@ -34,7 +43,7 @@ public abstract class Room {
 
     public abstract String getRoomType();
 
-    public int getRoomId() {
+    public String getRoomId() {
         return roomId;
     }
 

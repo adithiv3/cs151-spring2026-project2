@@ -9,12 +9,12 @@ public class Employee {
 
     // to handle ID number generation
     private static int nextEmployeeID = 1;
-    private static final int MAX_EMPLOYEES = 100; // since we need to handle  a max of 100 instances
     private static int totalEmployees = 0;
 
-    public Employee(String name, String role, Hotel assignedHotel) throws OverCapacityException{
-        if (totalEmployees >= MAX_EMPLOYEES){
-            throw new OverCapacityException("Error: Employee limit of 100 reached.");
+    public Employee(String name, String role, Hotel assignedHotel) {
+        if (totalEmployees >= Main.MAXIMUM_INSTANCES) {
+            System.out.println("Error: Maximum number of employees reached.");
+            return;
         }
         this.name = name;
         this.role = role;
@@ -34,22 +34,18 @@ public class Employee {
     }
 
     public void checkInGuest(Reservation reservation){
-        if (reservation != null && reservation.getOutstandingBalance() < 500)
-            {
+        if (reservation != null && reservation.getOutstandingBalance() == 0) {
             reservation.checkIn();
-            } 
-        else 
-            {
-                System.out.println("Check-in denied due to unverified reservation or unpaid balance");
-            }
+        } else {
+            System.out.println("Check-in denied due to unverified reservation or unpaid balance");
+        }
     }
 
     public void checkOutGuest(Reservation reservation){
-        if (reservation != null && reservation.getOutstandingBalance() == 0){
+        if (reservation != null) {
             reservation.checkOut();
-        }
-        else {
-            System.out.println("Check-out denied due to unpaid balance.");
+        } else {
+            System.out.println("Check-out denied: no reservation found.");
         }
     }
 
@@ -65,13 +61,25 @@ public class Employee {
     public String getEmployeeID(){
         return this.employeeID;
     }
+
+    public String getName(){
+        return this.name;
+    }
+
+    public String getRole(){
+        return this.role;
+    }
+
+    public Hotel getAssignedHotel(){
+        return this.assignedHotel;
+    }
     private String generateEmployeeID(){
         return "EMPLOYEE-" + (nextEmployeeID++);
     }
 
     @Override
     public String toString(){
-        return "Employee Name: " + name + " \n ID: " + employeeID + "\n Role: " + role; 
+        return "Employee Name: " + name + " \n ID: " + employeeID + " \n Assigned Hotel: " + assignedHotel.getName() + "\n Role: " + role; 
     }
 
 }

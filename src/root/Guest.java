@@ -5,6 +5,7 @@ import java.time.LocalDate;
 public class Guest implements Chargeable {
 
     private static int nextGuestId = 1;
+    private static int totalGuests = 0;
 
     private String guestId;
     private String name;
@@ -14,6 +15,11 @@ public class Guest implements Chargeable {
 
     // This is my constructor
 	public Guest(String name, String membershipLevel) {
+        if (totalGuests >= Main.MAXIMUM_INSTANCES) {
+            System.out.println("Error: Maximum number of guests reached.");
+            return;
+        }
+        totalGuests++;
         this.name = name;
         this.membershipLevel = membershipLevel;
         this.outstandingBalance = 0.0;

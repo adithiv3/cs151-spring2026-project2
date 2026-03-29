@@ -4,6 +4,14 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import java.util.List;
 
+import hotel.Hotel;
+import hotel.Employee;
+import guest.Guest;
+import guest.Reservation;
+import room.*;
+import exception.OverCapacityException;
+
+
 public class HotelUnitTest {
 
     @Test

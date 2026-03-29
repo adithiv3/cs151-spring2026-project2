@@ -14,7 +14,6 @@ public class Employee {
     public Employee(String name, String role, Hotel assignedHotel) {
         if (totalEmployees >= Main.MAXIMUM_INSTANCES) {
            throw new OverCapacityException("Maximum number of employees reached.");
-            return;
         }
         this.name = name;
         this.role = role;

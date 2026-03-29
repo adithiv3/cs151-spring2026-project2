@@ -1,6 +1,6 @@
 import java.time.LocalDate;
 
-public class Reservation {
+public class Reservation implements Chargeable {
     private String reservationID;
     private Guest guest;
     private Room room;
@@ -16,7 +16,6 @@ public class Reservation {
     public Reservation( Guest guest, Room room, LocalDate checkInDate, LocalDate checkOutDate){
         if (totalReservations >= Main.MAXIMUM_INSTANCES) {
            throw new OverCapacityException("Maximum number of reservations reached.");
-            return;
         }
         totalReservations++;
         this.guest = guest;

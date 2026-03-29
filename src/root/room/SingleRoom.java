@@ -1,3 +1,5 @@
+package room;
+
 public class SingleRoom extends Room {
 
     public SingleRoom(double basePrice) {
@@ -6,7 +8,7 @@ public class SingleRoom extends Room {
 
     @Override
     public double calculateNightlyRate() {
-        return basePrice; // no extra cost
+        return basePrice;
     }
 
     @Override

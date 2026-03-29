@@ -1,3 +1,7 @@
+package room;
+
+import ui.Util;
+
 public abstract class Room {
     private static final int ROOMS_PER_FLOOR = 25;
     private static int totalRooms = 0;
@@ -8,7 +12,7 @@ public abstract class Room {
     protected boolean isAvailable;
 
     public Room(double basePrice, int capacity) {
-        if (totalRooms >= Main.MAXIMUM_INSTANCES) {
+        if (totalRooms >= Util.MAXIMUM_INSTANCES) {
             System.out.println("Error: Maximum number of rooms reached.");
             return;
         }
@@ -26,7 +30,6 @@ public abstract class Room {
         return "ROOM-" + number;
     }
 
-    // 🔥 Business logic
     public boolean canFitGuests(int guests) {
         return guests <= capacity;
     }

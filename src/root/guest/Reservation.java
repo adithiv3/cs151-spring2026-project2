@@ -1,3 +1,9 @@
+package guest;
+
+import exception.OverCapacityException;
+import room.Room;
+import ui.Util;
+
 import java.time.LocalDate;
 
 public class Reservation implements Chargeable {
@@ -9,13 +15,19 @@ public class Reservation implements Chargeable {
     private boolean cancelled;
     private boolean checkedIn;
     private boolean checkedOut;
+    private boolean rated;
     private double outstandingBalance;
-    private static int nextReservationId = 1; // Used for generateReservationID()
+    private static int nextReservationId = 1;
     private static int totalReservations = 0;
 
     public Reservation( Guest guest, Room room, LocalDate checkInDate, LocalDate checkOutDate){
+<<<<<<< HEAD:src/root/Reservation.java
         if (totalReservations >= Main.MAXIMUM_INSTANCES) {
            throw new OverCapacityException("Maximum number of reservations reached.");
+=======
+        if (totalReservations >= Util.MAXIMUM_INSTANCES) {
+            throw new OverCapacityException("Maximum number of reservations reached.");
+>>>>>>> main:src/root/guest/Reservation.java
         }
         totalReservations++;
         this.guest = guest;
@@ -25,6 +37,7 @@ public class Reservation implements Chargeable {
         this.cancelled = false;
         this.checkedIn = false;
         this.checkedOut = false;
+        this.rated = false;
         this.reservationID = generateReservationID();
         this.outstandingBalance = calculateTotalCharge();
     }
@@ -54,6 +67,14 @@ public class Reservation implements Chargeable {
 
     public boolean isCheckedOut() {
         return checkedOut;
+    }
+
+    public boolean isRated() {
+        return rated;
+    }
+
+    public void setRated(boolean rated) {
+        this.rated = rated;
     }
 
     public double calculateTotalCharge(){
@@ -88,7 +109,7 @@ public class Reservation implements Chargeable {
     public Room getRoom() {
         return room;
     }
-    
+
     public boolean isCancelled() {
         return cancelled;
     }

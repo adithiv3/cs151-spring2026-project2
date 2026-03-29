@@ -1,3 +1,11 @@
+package hotel;
+
+import guest.Guest;
+import guest.Rating;
+import guest.Reservation;
+import room.Room;
+import ui.Util;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,6 +18,7 @@ public class Hotel {
     private List<Guest> guests;
     private List<Employee> employees;
     private List<Reservation> reservations;
+    private List<Rating> ratings;
 
     public Hotel(String name) {
         this.name = name;
@@ -18,6 +27,7 @@ public class Hotel {
         this.guests = new ArrayList<>();
         this.employees = new ArrayList<>();
         this.reservations = new ArrayList<>();
+        this.ratings = new ArrayList<>();
     }
 
     public void addRoom(Room room) {
@@ -40,6 +50,27 @@ public class Hotel {
         employees.add(employee);
     }
 
+    public Guest findGuestById(String id) {
+        for (Guest g : guests) {
+            if (g.getGuestId().equalsIgnoreCase(id)) return g;
+        }
+        return null;
+    }
+
+    public Employee findEmployeeById(String id) {
+        for (Employee e : employees) {
+            if (e.getEmployeeID().equalsIgnoreCase(id)) return e;
+        }
+        return null;
+    }
+
+    public Reservation findReservationById(String id) {
+        for (Reservation r : reservations) {
+            if (r.getReservationId().equalsIgnoreCase(id)) return r;
+        }
+        return null;
+    }
+
     public Room findAvailableRoom(String roomType, int guestCount) {
         for (Room room : rooms) {
             if (room.isAvailable()
@@ -53,6 +84,25 @@ public class Hotel {
 
     public void addReservation(Reservation reservation) {
         reservations.add(reservation);
+    }
+
+    public void removeReservation(Reservation reservation) {
+        reservations.remove(reservation);
+    }
+
+    public void addRating(Rating rating) {
+        ratings.add(rating);
+    }
+
+    public List<Rating> getRatings() {
+        return ratings;
+    }
+
+    public double getAverageRating() {
+        if (ratings.isEmpty()) return 0;
+        int sum = 0;
+        for (Rating r : ratings) sum += r.getStars();
+        return (double) sum / ratings.size();
     }
 
     public String getHotelId() {
@@ -70,6 +120,12 @@ public class Hotel {
     public void removeRoom(Room room) {
         if (!rooms.remove(room)) {
             System.out.println("Room " + room.getRoomId() + " not found in " + name + ".");
+        }
+    }
+
+    public void removeEmployee(Employee employee) {
+        if (!employees.remove(employee)) {
+            System.out.println("Employee " + employee.getEmployeeID() + " not found in " + name + ".");
         }
     }
 
@@ -96,10 +152,10 @@ public class Hotel {
     @Override
     public String toString() {
         return "Hotel ID: " + hotelId
-                + "\nName: " + name
-                + "\nAvailable Rooms: " + (Main.MAXIMUM_INSTANCES - rooms.size())
-                + "\nGuests: " + guests.size()
-                + "\nEmployees: " + employees.size()
-                + "\nReservations: " + reservations.size();
+                + " |Name: " + name
+                + " |Available Rooms: " + (Util.MAXIMUM_INSTANCES - rooms.size())
+                + " |Guests: " + guests.size()
+                + " |Employees: " + employees.size()
+                + " |Reservations: " + reservations.size();
     }
 }

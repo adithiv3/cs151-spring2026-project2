@@ -1,3 +1,5 @@
+package guest;
+
 public interface Chargeable {
     void addCharge(double amount, String reason);
 

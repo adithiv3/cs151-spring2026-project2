@@ -1,12 +1,12 @@
+package guest;
+
 public class Rating {
     private String guestName;
     private int stars;
-    private String description;
 
-    public Rating(String guestName, int stars, String description) {
+    public Rating(String guestName, int stars) {
         this.guestName = guestName;
         this.stars = Math.max(1, Math.min(5, stars));
-        this.description = description;
     }
 
     public String getGuestName() {
@@ -17,12 +17,8 @@ public class Rating {
         return stars;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
     @Override
     public String toString() {
-        return "[" + stars + "/5] by " + guestName + ": " + description;
+        return "[" + stars + "/5] by " + guestName;
     }
 }

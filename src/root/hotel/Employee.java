@@ -1,4 +1,8 @@
-import java.time.LocalDate;
+package hotel;
+
+import exception.OverCapacityException;
+import guest.Reservation;
+import ui.Util;
 
 public class Employee {
 
@@ -7,30 +11,18 @@ public class Employee {
     private String role;
     private Hotel assignedHotel;
 
-    // to handle ID number generation
     private static int nextEmployeeID = 1;
     private static int totalEmployees = 0;
 
     public Employee(String name, String role, Hotel assignedHotel) {
-        if (totalEmployees >= Main.MAXIMUM_INSTANCES) {
-           throw new OverCapacityException("Maximum number of employees reached.");
-            return;
+        if (totalEmployees >= Util.MAXIMUM_INSTANCES) {
+            throw new OverCapacityException("Maximum number of employees reached.");
         }
         this.name = name;
         this.role = role;
         this.assignedHotel = assignedHotel;
         this.employeeID = generateEmployeeID();
         totalEmployees++;
-    }
-
-    public Reservation createReservation(Guest guest, Room room, LocalDate checkIn, LocalDate checkOut){
-        if (room.isAvailable()){
-            Reservation reservation = new Reservation(guest, room, checkIn, checkOut);
-            System.out.println("Reservation " + reservation.getReservationId() + "created");
-            return reservation;
-        }
-        System.out.println("Reservation failed.");
-        return null;
     }
 
     public void checkInGuest(Reservation reservation){
@@ -49,15 +41,6 @@ public class Employee {
         }
     }
 
-    public void assignRoomForClening(Room room){
-        if (this.role.equalsIgnoreCase("Manager") || this.role.equalsIgnoreCase("Housekeeping")){
-            System.out.println("Room " + room.getRoomId() + " is assigned for cleaning to " + this.name);            
-        }
-        else {
-            System.out.println("Access Denied: Role '" + this.role + "' cannot assign cleaning tasks.");
-        }
-    }
-
     public String getEmployeeID(){
         return this.employeeID;
     }
@@ -73,13 +56,14 @@ public class Employee {
     public Hotel getAssignedHotel(){
         return this.assignedHotel;
     }
+
     private String generateEmployeeID(){
         return "EMPLOYEE-" + (nextEmployeeID++);
     }
 
     @Override
     public String toString(){
-        return "Employee Name: " + name + " \n ID: " + employeeID + " \n Assigned Hotel: " + assignedHotel.getName() + "\n Role: " + role; 
+        return "Employee Name: " + name + " \n ID: " + employeeID + " \n Assigned Hotel: " + assignedHotel.getName() + "\n Role: " + role;
     }
 
 }

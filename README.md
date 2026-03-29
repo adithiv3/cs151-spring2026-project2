@@ -36,7 +36,9 @@ The system supports the following functionality:
 ### Main Classes
 
 ---
+- HotelSystemUI
 - Hotel
+- Util
 - Guest (implements Chargeable)
 - Employee
 - Reservation (implements Chargeable)
@@ -62,6 +64,11 @@ The system supports the following functionality:
 2. Run `Main.java`
 3. Follow console prompts
 
+## Basic Program Flow
+
+1. Main Menu (Pick Guest/Employee)
+2. Guest/Employee Log In Menu
+3. Guest/Employee Menu
 ---
 Contributors:
 Adithi Vaishnavi Vuligonda, Aditya Nagpal, David Aguiniga, Thy Le
@@ -72,4 +79,4 @@ Aditya's contribution -
 
 David's contribution - I created the Guest class for our project, I would also create the tests for that class. I would communicate with my other groupmates, specifically those who created employees class and the chargeable interface. I also created the first draft/outline of our readme.
 
-Thy's contribution -
+Thy's contribution - I worked on Hotel, Rating, HotelSystemUI classes and made exceptions. I also made the UML diagram.

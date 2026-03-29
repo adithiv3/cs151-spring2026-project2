@@ -66,7 +66,7 @@ The system supports the following functionality:
 Contributors:
 Adithi Vaishnavi Vuligonda, Aditya Nagpal, David Aguiniga, Thy Le
 ---
-Adithi's contribution -
+Adithi's contribution - I worked on the Chargeable interface, Employee and Reservation classes, and the test cases for Employee, Reservation, and Guest classes.
 
 Aditya's contribution -
 

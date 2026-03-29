@@ -15,7 +15,7 @@ public class Reservation {
 
     public Reservation( Guest guest, Room room, LocalDate checkInDate, LocalDate checkOutDate){
         if (totalReservations >= Main.MAXIMUM_INSTANCES) {
-            System.out.println("Error: Maximum number of reservations reached.");
+           throw new OverCapacityException("Maximum number of reservations reached.");
             return;
         }
         totalReservations++;
@@ -89,7 +89,7 @@ public class Reservation {
     public Room getRoom() {
         return room;
     }
-
+    
     public boolean isCancelled() {
         return cancelled;
     }

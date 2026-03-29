@@ -18,10 +18,10 @@ public class GuestUnitTest {
         assertNotNull(john.getGuestId());
     }
 
-    // This test will test adding a charge
+    // This test will test adding a charge (NO reservation case)
     @Test
     void testAddCharge() {
-        Guest alice = new Guest("Alice", "Basic");
+        Guest alice = new Guest("Alice", "bronze");
 
         alice.addCharge(50.0, "Room Service");
 
@@ -42,7 +42,7 @@ public class GuestUnitTest {
     // This test will test overpaying
     @Test
     void testOverPayment() {
-        Guest gigi = new Guest("Gigi", "Basic");
+        Guest gigi = new Guest("Gigi", "bronze");
 
         gigi.addCharge(80.0, "Mini Bar");
         gigi.processPayment(100.0); // overpay
@@ -55,7 +55,7 @@ public class GuestUnitTest {
     void testReserveRoomSuccess() {
         Hotel hotel = new Hotel("Test Hotel");
 
-        Room room = new SingleRoom(100, 2, true);
+        Room room = new SingleRoom(100); // FIXED
         hotel.addRoom(room);
 
         Guest david = new Guest("David", "Gold");
@@ -70,6 +70,7 @@ public class GuestUnitTest {
 
         assertNotNull(res);
         assertEquals(david, res.getGuest());
+        assertEquals(res, david.getCurrentReservation());
     }
 
     // This test will test failing to reserve a room 
@@ -77,12 +78,12 @@ public class GuestUnitTest {
     void testReserveRoomFail() {
         Hotel hotel = new Hotel("Empty Hotel");
 
-        Guest eve = new Guest("Eve", "Basic");
+        Guest eve = new Guest("Eve", "bronze");
 
         assertThrows(RoomUnavailableException.class, () -> {
             eve.reserveRoom(
                     hotel,
-                    "Single",
+                    "Single Room", // FIXED string
                     1,
                     LocalDate.now(),
                     LocalDate.now().plusDays(2)
@@ -95,12 +96,12 @@ public class GuestUnitTest {
     void testCancelReservation() {
         Hotel hotel = new Hotel("Test Hotel");
 
-        Room room = new SingleRoom(100, 2, true);
+        Room room = new SingleRoom(100); // FIXED
         hotel.addRoom(room);
 
         Guest frank = new Guest("Frank", "Gold");
 
-        frank.reserveRoom(
+        Reservation res = frank.reserveRoom(
                 hotel,
                 room.getRoomType(),
                 1,
@@ -108,7 +109,7 @@ public class GuestUnitTest {
                 LocalDate.now().plusDays(2)
         );
 
-        frank.cancelCurrentReservation();
+        frank.cancelReservation(res); // FIXED
 
         assertNull(frank.getCurrentReservation());
     }
@@ -118,12 +119,12 @@ public class GuestUnitTest {
     void testInvalidDateRange() {
         Hotel hotel = new Hotel("Test Hotel");
 
-        Guest grace = new Guest("Grace", "Basic");
+        Guest grace = new Guest("Grace", "bronze");
 
         assertThrows(InvalidDateRangeException.class, () -> {
             grace.reserveRoom(
                     hotel,
-                    "Single",
+                    "Single Room",
                     1,
                     LocalDate.now(),
                     LocalDate.now().minusDays(1) // invalid
@@ -136,16 +137,16 @@ public class GuestUnitTest {
     void testOverCapacity() {
         Hotel hotel = new Hotel("Test Hotel");
 
-        Room room = new SingleRoom(100, 1, true); // capacity = 1
+        Room room = new SingleRoom(100); // capacity is ALWAYS 1
         hotel.addRoom(room);
 
-        Guest henry = new Guest("Henry", "Basic");
+        Guest henry = new Guest("Henry", "bronze");
 
         assertThrows(OverCapacityException.class, () -> {
             henry.reserveRoom(
                     hotel,
                     room.getRoomType(),
-                    3, // too many guests
+                    2, // > 1 → should fail
                     LocalDate.now(),
                     LocalDate.now().plusDays(2)
             );

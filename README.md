@@ -31,8 +31,6 @@ The system supports the following functionality:
 * Guest can leave ratings
 ---
 
-## System Design
-
 ### Main Classes
 
 ---
@@ -71,7 +69,7 @@ The system supports the following functionality:
 3. Guest/Employee Menu
 ---
 Contributors:
-Adithi Vaishnavi Vuligonda, Aditya Nagpal, David Aguiniga, Thy Le
+Adithi Vuligonda, Aditya Nagpal, David Aguiniga, Thy Le
 ---
 Adithi's contribution - I worked on the Chargeable interface, Employee and Reservation classes, and the test cases for Employee, Reservation, and Guest classes.
 

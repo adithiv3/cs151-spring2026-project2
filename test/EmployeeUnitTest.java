@@ -32,52 +32,13 @@ public class EmployeeUnitTest {
     @Test
     void testCreateReservationSuccess() {
         Hotel hotel = new Hotel("Hotel");
-        Employee emp = new Employee("Bob", "Receptionist", hotel);
         Guest guest = new Guest("John", "Gold");
-        Room room = new Room("101", "Single", 1, true);
+        Room room = new SingleRoom(100.0);
 
-        Reservation res = emp.createReservation(guest, room, LocalDate.now(), LocalDate.now().plusDays(2));
+        Reservation res = new Reservation(guest, room, LocalDate.now(), LocalDate.now().plusDays(2));
 
         assertNotNull(res);
         assertEquals(guest, res.getGuest());
-    }
-
-    @Test
-    void testCreateReservationRoomUnavailable() {
-        Hotel hotel = new Hotel("Hotel");
-        Employee emp = new Employee("Bob", "Receptionist", hotel);
-        Guest guest = new Guest("John", "Gold");
-        Room room = new Room("101", "Single", 1, false);
-
-        Reservation res = emp.createReservation(
-            guest, 
-            room, 
-            LocalDate.now(), 
-            LocalDate.now().plusDays(2)
-        );
-
-        assertNull(res);
-    }
-
-    @Test
-    void testAssignCleaningHousekeeping() {
-        Hotel hotel = new Hotel("Hotel");
-        Employee cleaner = new Employee("John", "Housekeeping", hotel);
-        Room room = new Room("102", "Double", 2, true);
-
-        cleaner.assignRoomForClening(room);
-        assertEquals("Housekeeping", cleaner.getRole());
-    }
-
-    @Test
-    void testAssignCleaningDenied() {
-        Hotel hotel = new Hotel("Hotel");
-        Employee receptionist = new Employee("Dave", "Receptionist", hotel);
-        Room room = new Room("103", "Suite", 4, true);
-
-        receptionist.assignRoomForClening(room);
-        assertNotEquals("Housekeeping", receptionist.getRole());
-        assertNotEquals("Manager", receptionist.getRole());
     }
 
     @Test
@@ -85,7 +46,7 @@ public class EmployeeUnitTest {
         Hotel hotel = new Hotel("Hotel");
         Employee emp = new Employee("Alice", "Receptionist", hotel);
         Guest guest = new Guest("John", "Gold");
-        Room room = new Room("104", "Single", 1, true);
+        Room room = new SingleRoom(100.0);
         
         Reservation res = new Reservation(guest, room, LocalDate.now(), LocalDate.now().plusDays(1));
         

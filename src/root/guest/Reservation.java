@@ -21,13 +21,8 @@ public class Reservation implements Chargeable {
     private static int totalReservations = 0;
 
     public Reservation( Guest guest, Room room, LocalDate checkInDate, LocalDate checkOutDate){
-<<<<<<< HEAD:src/root/Reservation.java
-        if (totalReservations >= Main.MAXIMUM_INSTANCES) {
-           throw new OverCapacityException("Maximum number of reservations reached.");
-=======
         if (totalReservations >= Util.MAXIMUM_INSTANCES) {
             throw new OverCapacityException("Maximum number of reservations reached.");
->>>>>>> main:src/root/guest/Reservation.java
         }
         totalReservations++;
         this.guest = guest;

@@ -28,7 +28,7 @@ public class HotelUnitTest {
     @Test
     void testAddAndRemoveRoom() {
         Hotel hotel = new Hotel("Hotel");
-        Room room = new Room("101", "Suite", 4, true);
+        Room room = new SuiteRoom(300.0);
 
         hotel.addRoom(room);
         assertEquals(1, hotel.getRooms().size());
@@ -52,7 +52,7 @@ public class HotelUnitTest {
     @Test
     void testFindAvailableRoomSuccess() {
         Hotel hotel = new Hotel("Hotel");
-        Room room = new Room("102", "Single", 1, true);
+        Room room = new SingleRoom(100.0);
         hotel.addRoom(room);
 
         Room found = hotel.findAvailableRoom("Single", 1);
@@ -64,7 +64,7 @@ public class HotelUnitTest {
     @Test
     void testFindAvailableRoomWrongType() {
         Hotel hotel = new Hotel("Hotel");
-        Room room = new Room("105", "Double", 2, true);
+        Room room = new DoubleRoom(200.0);
         hotel.addRoom(room);
 
         Room found = hotel.findAvailableRoom("Single", 1);
@@ -75,7 +75,7 @@ public class HotelUnitTest {
     @Test
     void testFindAvailableRoomOverCapacity() {
         Hotel hotel = new Hotel("Hotel");
-        Room room = new Room("106", "Single", 1, true); // Capacity is 1
+        Room room = new SingleRoom(100.0); // Capacity is 1
         hotel.addRoom(room);
 
         Room found = hotel.findAvailableRoom("Single", 3);
@@ -98,7 +98,7 @@ public class HotelUnitTest {
     void testAddReservation() {
         Hotel hotel = new Hotel("Grand Plaza");
         Guest guest = new Guest("John", "Basic");
-        Room room = new Room("404", "Double", 2, true);
+        Room room = new DoubleRoom(200.0);
         Reservation res = new Reservation(guest, room, null, null);
 
         hotel.addReservation(res);

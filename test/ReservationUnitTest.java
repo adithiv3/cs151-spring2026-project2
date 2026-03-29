@@ -18,7 +18,7 @@ public class ReservationUnitTest {
     @Test
     void testReservationCreation() {
         Guest guest = new Guest("John", "Alice");
-        Room room = new Room("201", "Double", 2, true);
+        Room room = new DoubleRoom(150.0);
         LocalDate checkIn = LocalDate.now();
         LocalDate checkOut = LocalDate.now().plusDays(3);
 
@@ -33,7 +33,7 @@ public class ReservationUnitTest {
     @Test
     void testCheckIn() {
         Guest guest = new Guest("Alice", "Gold");
-        Room room = new Room("202", "Single", 1, true);
+        Room room = new SingleRoom(100.0);
         Reservation res = new Reservation(guest, room, LocalDate.now(), LocalDate.now().plusDays(1));
 
         res.checkIn();
@@ -45,7 +45,7 @@ public class ReservationUnitTest {
     @Test
     void testCheckOut() {
         Guest guest = new Guest("Alice", "Gold");
-        Room room = new Room("203", "Single", 1, true);
+        Room room = new SingleRoom(100.0);
         Reservation res = new Reservation(guest, room, LocalDate.now(), LocalDate.now().plusDays(1));
 
         res.checkOut();
@@ -56,7 +56,7 @@ public class ReservationUnitTest {
     @Test
     void testCancelReservation() {
         Guest guest = new Guest("Jon", "Gold");
-        Room room = new Room("204", "Double", 2, true);
+        Room room = new DoubleRoom(200.0);
         Reservation res = new Reservation(guest, room, LocalDate.now(), LocalDate.now().plusDays(2));
 
         res.cancelReservation();
@@ -67,7 +67,7 @@ public class ReservationUnitTest {
     @Test
     void testAddCharge() {
         Guest guest = new Guest("Bob", "Gold");
-        Room room = new Room("301", "Suite", 4, true);
+        Room room = new SuiteRoom(300.0);
         Reservation res = new Reservation(guest, room, LocalDate.now(), LocalDate.now().plusDays(5));
 
         // Initial balance is 100.0, adding 50.0
@@ -79,7 +79,7 @@ public class ReservationUnitTest {
     @Test
     void testProcessPayment() {
         Guest guest = new Guest("Gold", "John");
-        Room room = new Room("302", "Suite", 4, true);
+        Room room = new SuiteRoom(350.0);
         Reservation res = new Reservation(guest, room, LocalDate.now(), LocalDate.now().plusDays(2));
 
         // Initial balance is 100.0, paying 40.0
@@ -91,7 +91,7 @@ public class ReservationUnitTest {
     @Test
     void testToString() {
         Guest guest = new Guest("Bob", "Basic");
-        Room room = new Room("105", "Single", 1, true);
+        Room room = new SingleRoom(100.0);
         Reservation res = new Reservation(guest, room, LocalDate.now(), LocalDate.now().plusDays(1));
 
         String details = res.toString();
@@ -104,7 +104,7 @@ public class ReservationUnitTest {
     @Test
     void testMaxReservationLimit() {
         Guest guest = new Guest("LimitTester", "Basic");
-        Room room = new Room("999", "Single", 1, true);
+        Room room = new SingleRoom(100.0);
         
         try {
             for (int i = 0; i < 100; i++) {

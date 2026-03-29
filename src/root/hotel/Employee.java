@@ -15,13 +15,8 @@ public class Employee {
     private static int totalEmployees = 0;
 
     public Employee(String name, String role, Hotel assignedHotel) {
-<<<<<<< HEAD:src/root/Employee.java
-        if (totalEmployees >= Main.MAXIMUM_INSTANCES) {
-           throw new OverCapacityException("Maximum number of employees reached.");
-=======
         if (totalEmployees >= Util.MAXIMUM_INSTANCES) {
             throw new OverCapacityException("Maximum number of employees reached.");
->>>>>>> main:src/root/hotel/Employee.java
         }
         this.name = name;
         this.role = role;

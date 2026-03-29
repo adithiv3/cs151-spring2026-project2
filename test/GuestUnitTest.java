@@ -5,6 +5,14 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.time.LocalDate;
 
+import hotel.Hotel;
+import hotel.Employee;
+import guest.Guest;
+import guest.Reservation;
+import room.*;
+import exception.OverCapacityException;
+
+
 public class GuestUnitTest {
 
     // This test will test my constructor

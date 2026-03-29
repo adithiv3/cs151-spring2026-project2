@@ -6,7 +6,7 @@ import ui.Util;
 
 import java.time.LocalDate;
 
-public class Reservation {
+public class Reservation implements Chargeable {
     private String reservationID;
     private Guest guest;
     private Room room;

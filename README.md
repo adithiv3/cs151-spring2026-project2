@@ -24,13 +24,11 @@ The system supports the following functionality:
 
 * Guests can reserve hotel rooms
 * Guests can view reservations and manage payments
-* Guests can accumulate loyalty points
-* Employees can create reservations for guests
 * Employees can check guests in and out
 * Rooms can be marked available or occupied
 * Charges (such as room service or amenities) can be added to guest accounts
 * Total charges are tracked and processed
-
+* Guest can leave ratings
 ---
 
 ## System Design

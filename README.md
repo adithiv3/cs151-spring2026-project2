@@ -73,7 +73,7 @@ Adithi Vuligonda, Aditya Nagpal, David Aguiniga, Thy Le
 ---
 Adithi's contribution - I worked on the Chargeable interface, Employee and Reservation classes, and the test cases for Employee, Reservation, and Guest classes.
 
-Aditya's contribution -
+Aditya's contribution - Designed and implemented the Room package, including the abstract Room class and its subclasses (SingleRoom, DoubleRoom, and SuiteRoom). Responsible for room ID generation logic, pricing strategies, and enforcing object-oriented design principles such as abstraction, inheritance, and polymorphism.
 
 David's contribution - I created the Guest class for our project, I would also create the tests for that class. I would communicate with my other groupmates, specifically those who created employees class and the chargeable interface. I also created the first draft/outline of our readme.
 
